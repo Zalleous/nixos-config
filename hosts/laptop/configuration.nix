@@ -10,10 +10,7 @@
     ./hardware-configuration.nix
   ];
 
-  # Enable X11 for laptop (no NVIDIA driver needed)
-  services.xserver = {
-    enable = true;
-  };
+  # Sway is pure Wayland - no X server needed
 
   # Laptop-specific settings
   services.logind = {
