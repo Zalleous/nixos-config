@@ -42,7 +42,7 @@
   users.users.zalleous = {
     isNormalUser = true;
     description = "Zalleous";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" "render" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" "render" "seat" ];
     shell = pkgs.zsh;
   };
 

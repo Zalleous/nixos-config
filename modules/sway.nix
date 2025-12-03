@@ -46,8 +46,9 @@
   # Enable required services
   services.dbus.enable = true;
 
-  # Seat management for Wayland
+  # Seat management for Wayland - REQUIRED for Sway to access graphics
   security.polkit.enable = true;
+  services.seatd.enable = true;
 
   xdg.portal = {
     enable = true;
