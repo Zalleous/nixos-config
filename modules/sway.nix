@@ -64,6 +64,6 @@
     noto-fonts
     noto-fonts-color-emoji
     font-awesome
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    jetbrains-mono
   ];
 }
