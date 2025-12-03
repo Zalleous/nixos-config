@@ -37,24 +37,22 @@
         ];
       };
 
-      # Laptop configuration without NVIDIA
+      # Laptop configuration - minimal for programming
       laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/laptop/configuration.nix
           ./modules/common.nix
-          ./modules/hyprland.nix
+          ./modules/sway.nix
           ./modules/laptop.nix
-          ./modules/gaming.nix
-          ./modules/development.nix
-          ./modules/multimedia.nix
+          ./modules/development-minimal.nix
 
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.zalleous = import ./home/home.nix;
+            home-manager.users.zalleous = import ./home/home-minimal.nix;
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];

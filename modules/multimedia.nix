@@ -9,7 +9,7 @@
     mpv
 
     # Video editing
-    kdenlive
+    # kdenlive  # Temporarily disabled - package issue
     davinci-resolve  # Professional video editor
     obs-studio       # Streaming and recording
 
