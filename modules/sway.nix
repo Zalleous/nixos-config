@@ -47,8 +47,10 @@
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    wlroots.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 
   # Environment variables for Wayland
