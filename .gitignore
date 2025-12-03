@@ -1,0 +1,19 @@
+# NixOS specific
+result
+result-*
+
+# Ignore actual hardware configurations (these are machine-specific)
+# Note: We keep placeholder files in the repo, but you should generate
+# real ones during installation and not commit them
+hosts/*/hardware-configuration.nix.real
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
