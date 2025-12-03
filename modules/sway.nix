@@ -45,6 +45,10 @@
 
   # Enable required services
   services.dbus.enable = true;
+
+  # Seat management for Wayland
+  security.polkit.enable = true;
+
   xdg.portal = {
     enable = true;
     extraPortals = [
