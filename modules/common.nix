@@ -92,6 +92,18 @@
   # Firmware updates
   services.fwupd.enable = true;
 
+  # SSH server
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;  # You can disable this later and use keys only
+    };
+  };
+
+  # Open SSH port in firewall
+  networking.firewall.allowedTCPPorts = [ 22 ];
+
   # System state version
   system.stateVersion = "24.05";
 }

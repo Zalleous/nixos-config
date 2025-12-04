@@ -39,8 +39,7 @@
     fzf
 
     # AI coding assistant
-    # Install with: npm install -g @anthropic-ai/claude-code
-    # Or add nodejs global packages here if needed
+    claude-code
 
     # Network tools (curl/wget already in common.nix)
     httpie
