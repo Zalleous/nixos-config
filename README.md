@@ -4,6 +4,7 @@ My personal NixOS configuration with support for both desktop (with NVIDIA) and 
 
 ## Features
 
+### Desktop (Full-featured)
 - **Window Manager**: Hyprland (Wayland compositor) - XWayland enabled for compatibility
 - **Terminal**: Alacritty with Tokyo Night theme
 - **Shell**: ZSH with Oh My ZSH and Zoxide
@@ -11,6 +12,13 @@ My personal NixOS configuration with support for both desktop (with NVIDIA) and 
 - **Gaming**: Steam, Lutris, GameMode, MangoHud, PS4 controller support
 - **Multimedia**: Video/audio editing, OBS, media players
 - **Office**: LibreOffice and PDF tools
+
+### Laptop (Minimal for Programming)
+- **Window Manager**: Sway (lightweight Wayland compositor)
+- **Terminal**: Alacritty with Tokyo Night theme
+- **Shell**: ZSH with Oh My ZSH and Zoxide
+- **Development**: Python, Node.js, Docker, Neovim (essential dev tools only)
+- **No gaming or multimedia packages** - optimized for battery and performance
 
 ## Structure
 
