@@ -183,24 +183,262 @@
         };
       };
 
-      # Status bar
-      bars = [{
-        position = "top";
-        statusCommand = "${pkgs.i3status}/bin/i3status";
-        colors = {
-          background = "#1a1b26";
-          statusline = "#a9b1d6";
-        };
-      }];
+      # Disable default bar (using Waybar instead)
+      bars = [];
+
+      # Startup commands
+      startup = [
+        { command = "mako"; }
+      ];
     };
   };
 
-  # Minimal GTK theme
+  # Waybar - Modern status bar
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+        spacing = 4;
+
+        modules-left = [ "sway/workspaces" "sway/mode" ];
+        modules-center = [ "sway/window" ];
+        modules-right = [ "network" "cpu" "memory" "battery" "clock" ];
+
+        "sway/workspaces" = {
+          disable-scroll = true;
+          all-outputs = true;
+        };
+
+        "sway/window" = {
+          max-length = 50;
+        };
+
+        "network" = {
+          format-wifi = " {essid}";
+          format-ethernet = " Connected";
+          format-disconnected = "⚠ Disconnected";
+          tooltip-format = "{ifname}: {ipaddr}";
+        };
+
+        "cpu" = {
+          format = " {usage}%";
+          tooltip = false;
+        };
+
+        "memory" = {
+          format = " {}%";
+        };
+
+        "battery" = {
+          format = "{icon} {capacity}%";
+          format-icons = [ "" "" "" "" "" ];
+          format-charging = " {capacity}%";
+          format-plugged = " {capacity}%";
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+        };
+
+        "clock" = {
+          format = " {:%H:%M}";
+          format-alt = " {:%Y-%m-%d}";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+      };
+    };
+
+    style = ''
+      * {
+        border: none;
+        border-radius: 0;
+        font-family: "JetBrainsMono Nerd Font";
+        font-size: 13px;
+        min-height: 0;
+      }
+
+      window#waybar {
+        background: #1a1b26;
+        color: #a9b1d6;
+      }
+
+      #workspaces button {
+        padding: 0 8px;
+        background: transparent;
+        color: #565f89;
+        border-bottom: 2px solid transparent;
+      }
+
+      #workspaces button.focused {
+        color: #7aa2f7;
+        border-bottom: 2px solid #7aa2f7;
+      }
+
+      #workspaces button.urgent {
+        color: #f7768e;
+      }
+
+      #workspaces button:hover {
+        background: #24283b;
+        color: #a9b1d6;
+      }
+
+      #mode {
+        background: #f7768e;
+        color: #1a1b26;
+        padding: 0 10px;
+        margin: 0 5px;
+      }
+
+      #window {
+        color: #a9b1d6;
+        font-weight: normal;
+      }
+
+      #clock,
+      #battery,
+      #cpu,
+      #memory,
+      #network {
+        padding: 0 10px;
+        margin: 0 2px;
+      }
+
+      #battery.charging {
+        color: #9ece6a;
+      }
+
+      #battery.warning:not(.charging) {
+        color: #e0af68;
+      }
+
+      #battery.critical:not(.charging) {
+        color: #f7768e;
+      }
+    '';
+  };
+
+  # Mako - Notification daemon
+  services.mako = {
+    enable = true;
+    backgroundColor = "#1a1b26";
+    textColor = "#a9b1d6";
+    borderColor = "#7aa2f7";
+    borderRadius = 8;
+    borderSize = 2;
+    width = 300;
+    height = 100;
+    margin = "10";
+    padding = "10";
+    defaultTimeout = 5000;
+    font = "JetBrainsMono Nerd Font 10";
+  };
+
+  # Wofi - App launcher styling
+  programs.wofi = {
+    enable = true;
+    settings = {
+      width = 600;
+      height = 400;
+      location = "center";
+      show = "drun";
+      prompt = "Search...";
+      filter_rate = 100;
+      allow_markup = true;
+      no_actions = true;
+      halign = "fill";
+      orientation = "vertical";
+      content_halign = "fill";
+      insensitive = true;
+      allow_images = true;
+      image_size = 40;
+      gtk_dark = true;
+    };
+
+    style = ''
+      * {
+        font-family: "JetBrainsMono Nerd Font";
+        font-size: 14px;
+      }
+
+      window {
+        margin: 0px;
+        border: 2px solid #7aa2f7;
+        background-color: #1a1b26;
+        border-radius: 8px;
+      }
+
+      #input {
+        margin: 10px;
+        padding: 10px;
+        border: none;
+        background-color: #24283b;
+        color: #a9b1d6;
+        border-radius: 4px;
+      }
+
+      #inner-box {
+        margin: 10px;
+        background-color: transparent;
+      }
+
+      #outer-box {
+        margin: 10px;
+        background-color: transparent;
+      }
+
+      #scroll {
+        margin: 0px;
+      }
+
+      #text {
+        margin: 5px;
+        color: #a9b1d6;
+      }
+
+      #entry:selected {
+        background-color: #7aa2f7;
+        color: #1a1b26;
+        border-radius: 4px;
+      }
+
+      #entry:selected #text {
+        color: #1a1b26;
+        font-weight: bold;
+      }
+    '';
+  };
+
+  # Improved GTK theme - Tokyo Night inspired
   gtk = {
     enable = true;
     theme = {
       name = "Adwaita-dark";
       package = pkgs.gnome-themes-extra;
     };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 10;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+
+  # QT theme to match GTK
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
   };
 }
