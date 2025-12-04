@@ -33,8 +33,8 @@
 
     shellAliases = {
       ll = "ls -la";
-      update = "sudo nixos-rebuild switch --flake ~/.config/nixos#$(hostname)";
-      upgrade = "nix flake update ~/.config/nixos && sudo nixos-rebuild switch --flake ~/.config/nixos#$(hostname)";
+      update = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
+      upgrade = "cd /etc/nixos && sudo git pull && sudo nix flake update && sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
     };
 
     oh-my-zsh = {
