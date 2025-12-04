@@ -33,7 +33,7 @@
 
     shellAliases = {
       ll = "ls -la";
-      update = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
+      update = "cd /etc/nixos && sudo git pull && sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
       upgrade = "cd /etc/nixos && sudo git pull && sudo nix flake update && sudo nixos-rebuild switch --flake /etc/nixos#$(hostname)";
     };
 
