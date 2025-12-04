@@ -8,30 +8,28 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
-      # Desktop configuration with NVIDIA
+      # Desktop configuration with NVIDIA - minimal dev + gaming + multimedia
       desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/desktop/configuration.nix
           ./modules/common.nix
-          ./modules/hyprland.nix
+          ./modules/sway.nix
           ./modules/nvidia.nix
           ./modules/gaming.nix
-          ./modules/development.nix
+          ./modules/development-minimal.nix
           ./modules/multimedia.nix
 
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.zalleous = import ./home/home.nix;
+            home-manager.users.zalleous = import ./home/home-minimal.nix;
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];
