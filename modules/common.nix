@@ -58,15 +58,7 @@
       users = [ "zalleous" ];
       commands = [
         {
-          command = "${pkgs.git}/bin/git";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.nix}/bin/nix";
+          command = "ALL";
           options = [ "NOPASSWD" ];
         }
       ];
