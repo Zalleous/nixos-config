@@ -52,6 +52,27 @@
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Allow passwordless sudo for system maintenance commands
+  security.sudo.extraRules = [
+    {
+      users = [ "zalleous" ];
+      commands = [
+        {
+          command = "${pkgs.git}/bin/git";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.nix}/bin/nix";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   # Allow unfree packages (needed for many apps including Steam, Discord, etc.)
   nixpkgs.config.allowUnfree = true;
 
