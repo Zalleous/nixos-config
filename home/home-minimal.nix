@@ -188,6 +188,7 @@
 
       # Startup commands
       startup = [
+        { command = "waybar"; }
         { command = "mako"; }
       ];
     };
