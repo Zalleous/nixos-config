@@ -10,9 +10,11 @@
   # Git configuration
   programs.git = {
     enable = true;
-    userName = "zalleous";
-    userEmail = "your-email@example.com"; # Update this with your email
-    extraConfig = {
+    settings = {
+      user = {
+        name = "zalleous";
+        email = "your-email@example.com"; # Update this with your email
+      };
       init.defaultBranch = "main";
       pull.rebase = false;
     };
@@ -325,17 +327,19 @@
   # Mako - Notification daemon
   services.mako = {
     enable = true;
-    backgroundColor = "#1a1b26";
-    textColor = "#a9b1d6";
-    borderColor = "#7aa2f7";
-    borderRadius = 8;
-    borderSize = 2;
-    width = 300;
-    height = 100;
-    margin = "10";
-    padding = "10";
-    defaultTimeout = 5000;
-    font = "JetBrainsMono Nerd Font 10";
+    settings = {
+      background-color = "#1a1b26";
+      text-color = "#a9b1d6";
+      border-color = "#7aa2f7";
+      border-radius = 8;
+      border-size = 2;
+      width = 300;
+      height = 100;
+      margin = "10";
+      padding = "10";
+      default-timeout = 5000;
+      font = "JetBrainsMono Nerd Font 10";
+    };
   };
 
   # Wofi - App launcher styling
